@@ -1,4 +1,4 @@
-import { IsEmail, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsOptional, IsString, IsUUID } from 'class-validator';
 
 import { ApiProperty } from '@nestjs/swagger';
 import { CountryEntity } from '../../country/entities/country.entity';
@@ -55,12 +55,14 @@ export class CreateCompanyDto {
     additionalInfo: string;
 
     @ApiProperty()
+    @IsUUID()
     country: CountryEntity;
 
     @ApiProperty()
     products: ProductEntity[];
 
     @ApiProperty()
+    @IsUUID()
     owner: UserEntity;
 
     @ApiProperty({ example: 'TRN12345' })
