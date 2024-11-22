@@ -1,4 +1,4 @@
-name: NestJS API CI
+name: PFSnap API CI
 
 on:
   push:

@@ -13,7 +13,7 @@ export class InvoiceService {
   ) { }
 
   async create(createInvoiceDto: CreateInvoiceDto) {
-    const find = await this.findOneByNumber(createInvoiceDto.number);
+    const find = await this.findOneByNumberAndCompanyId(createInvoiceDto.number, createInvoiceDto.company as any);
 
     if (find) {
       throw new UnprocessableEntityException({
@@ -50,8 +50,13 @@ export class InvoiceService {
     return find;
   }
 
-  async findOneByNumber(number: string) {
-    const find = await this.repository.findBy({ number });
+  async findOneByNumberAndCompanyId(number: string, companyId: string) {
+    const find = await this.repository.find({
+      where: {
+        number,
+        company: { id: companyId }
+      },
+    });
     if (!find) {
       throw new NotFoundException({
         status: HttpStatus.NOT_FOUND,

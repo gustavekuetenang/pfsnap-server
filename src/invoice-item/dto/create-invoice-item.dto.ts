@@ -1,4 +1,4 @@
-import { IsDecimal, IsOptional, IsString } from 'class-validator';
+import { IsDecimal, IsOptional, IsString, IsUUID } from 'class-validator';
 
 import { ApiProperty } from '@nestjs/swagger';
 import { InvoiceEntity } from '../../invoice/entities/invoice.entity';
@@ -18,8 +18,10 @@ export class CreateInvoiceItemDto {
   unitPrice: number;
 
   @ApiProperty()
+  @IsUUID()
   product: ProductEntity;
 
   @ApiProperty()
+  @IsUUID()
   invoice: InvoiceEntity;
 }
